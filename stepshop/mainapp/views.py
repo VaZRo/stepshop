@@ -1,11 +1,12 @@
 from django.shortcuts import render
 
+
 links_menu = [
-    {'link': 'index', 'name': 'Home'},
-    {'link': 'products:index', 'name': 'Products'},
-    {'link': 'about', 'name': 'About Us'},
-    {'link': 'contacts', 'name': 'Contacts'},
-]
+        {'link': 'index', 'name': 'Home'},
+        {'link': 'products:index', 'name': 'Products'},
+        {'link': 'about', 'name': 'About Us'},
+        {'link': 'contacts', 'name': 'Contacts'},
+    ]
 
 
 def index(request):
