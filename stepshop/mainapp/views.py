@@ -1,55 +1,52 @@
 from django.shortcuts import render
 
+from mainapp.models import Product
 
-links_menu = [
+
+def get_data(**kwargs):
+    links_menu = [
         {'link': 'index', 'name': 'Home'},
         {'link': 'products:index', 'name': 'Products'},
         {'link': 'about', 'name': 'About Us'},
         {'link': 'contacts', 'name': 'Contacts'},
     ]
+    context = {
+        'links_menu': links_menu,
+    }
+
+    context.update(**kwargs)
+    return context
 
 
 def index(request):
     title = "Главная"
-    context = {
-        "title": title,
-        'links_menu': links_menu,
-    }
+    context = get_data(title=title)
     return render(request, 'index.html', context)
 
 
 def about(request):
     title = "Информация"
-    context = {
-        "title": title,
-        'links_menu': links_menu,
-    }
+    context = get_data(title=title)
     return render(request, 'about.html', context)
 
 
 def contacts(request):
     title = "Контакты"
-    context = {
-        "title": title,
-        'links_menu': links_menu,
-    }
+    context = get_data(title=title)
     return render(request, 'contacts.html', context)
 
 
 def products(request):
     title = "Каталог продуктов"
-    context = {
-        "title": title,
-        'links_menu': links_menu,
-    }
+
+    prods = Product.objects.all()
+    context = get_data(title=title, prods=prods)
     return render(request, 'products.html', context)
 
 
-def product(request):
+def product(request, pk):
     title = "Продукт"
-    context = {
-        "title": title,
-        'links_menu': links_menu,
-    }
+    prod = Product.objects.get(pk=pk)
+    context = get_data(title=title, prod=prod)
     return render(request, 'product.html', context)
 
