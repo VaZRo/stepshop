@@ -23,7 +23,12 @@
           <div class="col-md-6">
             <div class="product-slider">
               <div id="slider" class="flexslider">
+                {% if prod.image %}
                 <img src="{{ prod.image.url }}" class="img-fluid" alt="{{ prod.name }}" title="{{ prod.name }}"/>
+                {% else %}
+                    <img src ="{% static 'assets/images/default.png' %}"
+                         alt="нет картинки">
+                  {% endif %}
               </div>
 
             </div>
@@ -61,16 +66,21 @@
             <div class="owl-carousel owl-theme">
 
               {% for prod in prods %}
-
               <a href="{% url 'products:product' prod.pk %}">
                 <div class="featured-item">
-                  <img src="{{ prod.image.url }}" alt="Item 1">
+                  {% if prod.image %}
+                    <img src ="{{ prod.image.url }}"
+                         alt="{{ prod.name }}">
+                    {% else %}
+                    <img src ="{% static 'assets/images/default.png' %}"
+                         alt="нет картинки">
+                  {% endif %}
                   <h4>{{ prod.name }}</h4>
-                  <h6>${{ prod.price }}</h6>
+                  <h6>{{ prod.price }}</h6>
                 </div>
               </a>
-
               {% endfor %}
+
 
             </div>
           </div>
