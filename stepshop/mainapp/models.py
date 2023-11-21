@@ -4,7 +4,7 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(
         verbose_name="Имя ",
-        max_length =64,
+        max_length=64,
         unique=True,
     )
 

@@ -36,7 +36,7 @@
               <span>7 left on stock</span>
               <div class="down-content">
                 <div class="categories">
-                  <h6>Category: <span><a href="#">{{ prod.category }}</a></span></h6>
+                    <h6>Category: <span><a href="{% url 'products:category' prod.pk %}">{{ prod.category }}</a></span></h6>
                 </div>
               </div>
             </div>
