@@ -10,6 +10,7 @@ def get_data(**kwargs):
         {'link': 'about', 'name': 'About Us'},
         {'link': 'contacts', 'name': 'Contacts'},
     ]
+
     context = {
         'links_menu': links_menu,
     }
