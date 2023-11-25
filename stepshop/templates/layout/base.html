@@ -36,6 +36,11 @@ https://www.tooplate.com/view/2114-pixie
         <div class="row">
           <div class="col-md-12">
             {% if user.is_authenticated %}
+            {% if user.avatar %}
+                    <img src ="{{ user.avatar.url }}" alt="User Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
+                    {% else %}
+                    <img src ="{% static 'assets/images/default.png' %}" alt="нет картинки" style="width: 40px; height: 40px; border-radius: 50%;">
+                  {% endif %}
             <span>
               <a href="{% url 'auth:edit' %}" class="text-light">{{ user.username }}</a>
             </span> |
