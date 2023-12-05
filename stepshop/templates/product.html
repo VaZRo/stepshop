@@ -38,7 +38,7 @@
               <h4>{{ prod.name }}</h4>
               <h6>{{ prod.price }}</h6>
               <p>{{ prod.description }}</p>
-              <span>7 left on stock</span><br>
+              <span>{{ prod.quantity }}</span><br>
 
               <button class="btn btn-primary"><a href="{% url 'basket:add' prod.pk %}" class="text-light">Add To Cart</a></button>
 
@@ -68,7 +68,7 @@
           <div class="col-md-12">
             <div class="owl-carousel owl-theme">
 
-              {% for prod in prods %}
+              {% for prod in same_prods %}
               <a href="{% url 'products:product' prod.pk %}">
                 <div class="featured-item">
                   {% if prod.image %}
@@ -79,7 +79,7 @@
                          alt="нет картинки">
                   {% endif %}
                   <h4>{{ prod.name }}</h4>
-                  <h6>{{ prod.price }}</h6>
+                  <h6>{{ prod.price }}$</h6>
                 </div>
               </a>
               {% endfor %}
