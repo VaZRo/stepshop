@@ -1,12 +1,4 @@
-{% extends 'layout/base.html' %}
-{% load static %}
-
-
-{% block content %}
-    {% if user.is_authenticated %}
-        <div class="container" style="padding-top:60px;">
-            <div class="row basket_list">
-                <table class="table">
+<table class="table basket_list">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -24,6 +16,7 @@
                                 <td>{{ item.product }}</td>
                                 <td>
                                     <input type="number" name="{{ item.pk }}" value="{{ item.quantity }}" min="0">
+
                                 </td>
                                 <td>{{ item.product_cost }}</td>
                                 <td>
@@ -33,18 +26,9 @@
                         {% endfor %}
                     </tbody>
                 </table>
-                {% if basket %}
+{% if basket %}
                 <div class="basket_summary mb-5">
                     В корзине {{ basket.0.total_quantity }}
                     товаров стоимостью {{ basket.0.total_cost|floatformat:'2g' }} $
                 </div>
             {% endif %}
-            </div>
-
-        </div>
-    {% endif %}
-{% endblock %}
-
-{% block js %}
-<script src="{% static 'assets/js/basket.js' %}"></script>
-{% endblock %}
