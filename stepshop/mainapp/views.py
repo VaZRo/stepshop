@@ -29,6 +29,7 @@ def get_basket(user):
         return Basket.objects.filter(user=user)
     return []
 
+
 def index(request):
     title = "Главная"
     basket = get_basket(request.user)

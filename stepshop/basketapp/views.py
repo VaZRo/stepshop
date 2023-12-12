@@ -1,11 +1,14 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from mainapp.models import Product
 from .models import Basket
 from mainapp.views import get_data
 
 
+@login_required
 def basket(request):
     if request.user.is_authenticated:
         user_basket = Basket.objects.filter(user=request.user)
@@ -14,6 +17,7 @@ def basket(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+@login_required
 def basket_add(request, pk):
     product = get_object_or_404(Product, pk=pk)
     user_basket = Basket.objects.filter(user=request.user, product=product).first()
@@ -21,10 +25,16 @@ def basket_add(request, pk):
     if not user_basket:
         user_basket = Basket(user=request.user, product=product)
 
-    else:
-        user_basket.quantity += 1
+    user_basket.quantity += 1
     user_basket.save()
+
+    if 'login' in request.META.get('HTTP_REFERER'):
+        return HttpResponseRedirect(reverse('products:product', args=[pk]))
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-def basket_remove(request):
-    pass
+
+@login_required
+def basket_remove(request, pk):
+    basket_item = get_object_or_404(Basket, pk=pk)
+    basket_item.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
