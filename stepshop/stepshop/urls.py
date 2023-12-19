@@ -25,6 +25,7 @@ from mainapp.views import index, about, contacts
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('admin_staff/', include('adminapp.urls', namespace='admin_staff')),
     path('products/', include('mainapp.urls', namespace='products')),
     path('', index, name='index'),
     path('about/', about, name='about'),

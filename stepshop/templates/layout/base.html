@@ -36,6 +36,14 @@ https://www.tooplate.com/view/2114-pixie
       <div class="container">
         <div class="row">
           <div class="col-md-12 blue-menu text-light">
+
+            {% if user.is_superuser %}
+            <span>
+              <a href="{% url 'admin_staff:users' %}" class="text-light">Admin Panel</a>
+            </span> |
+            {% endif %}
+
+
             {% if user.is_authenticated %}
             {% if user.avatar %}
                     <img src ="{{ user.avatar.url }}" alt="User Avatar" style="width: 40px; height: 40px; border-radius: 50%;">
